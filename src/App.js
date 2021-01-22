@@ -1,6 +1,11 @@
-import logo from './logo.svg';
 import './App.css';
+import React, { Component } from 'react';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 
+import Home from './Home';
+import Callback from './Callback';
+
+/*
 function App() {
   return (
     <div className="App">
@@ -20,6 +25,22 @@ function App() {
       </header>
     </div>
   );
+}
+
+ */
+
+class App extends Component {
+
+  render() {
+    return (
+        <Router>
+          <Switch>
+            <Route exact path="/callback" component={Callback}/>
+            <Route exact path="/" component={Home}/>
+          </Switch>
+        </Router>
+    );
+  }
 }
 
 export default App;
