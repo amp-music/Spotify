@@ -1,39 +1,27 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
 
+function Callback(props) {
+    const [token, setToken] = useState(null);
 
-class Callback extends Component {
-    constructor() {
-        super();
-        this.state = {
-            token: null,
-        }
-        this.mounted = false;
-        this.code = null;
-        this.client_id = "8095d382e8214dc5b5e54f7f6cf9c8ef";
+    useEffect(() => {
+        const resp = props.location.hash;
+        let authToken = resp.substring(resp.indexOf('=')+1, resp.indexOf('&'));
+        localStorage.setItem('authToken', authToken);
+        setToken(authToken);
+    }, [props.location.hash]);
+
+    if (token) {
+        return (
+            <Redirect to={{pathname: '/', state: {token: token}}}/>
+        );
     }
-
-
-    componentDidMount() {
-        let resp = this.props.location.hash;
-        let token = resp.substring(resp.indexOf('=')+1, resp.indexOf('&'));
-        localStorage.setItem('authToken', token);
-        this.setState({token: token}) // Force a re-render so we can re-direct back to main screen.
-    }
-
-    render() {
-        if (this.state.token) {
-            return (
-                <Redirect to={{pathname: '/', state: {token: this.token}}}/>
-            );
-        }
-        else {
-            return (
-                <div>
-                    <h1>Callback!</h1>
-                </div>
-            );
-        }
+    else {
+        return (
+            <div>
+                <h1>Callback!</h1>
+            </div>
+        );
     }
 }
 
