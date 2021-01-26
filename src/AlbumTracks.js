@@ -18,7 +18,7 @@ function AlbumTracks(props) {
         const tracks = respjson?.items;
         tracks.forEach((track, index) => {
             ret.push(
-                <Card.Body>{track.name}</Card.Body>
+                <Card.Body key={index}>{track.name}</Card.Body>
             );
         });
         setTracks(ret);

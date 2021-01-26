@@ -17,7 +17,7 @@ class Albums extends Component {
         if (this.state.albums.length > 0) {
             this.state.albums.forEach((album, index) => {
                 ret.push(
-                    <Card>
+                    <Card key={index}>
                         <Card.Header>
                             <Accordion.Toggle as={Button} variant="link" eventKey={index}>
                                 {album.name}
