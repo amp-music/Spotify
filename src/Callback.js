@@ -7,6 +7,7 @@ function Callback(props) {
     useEffect(() => {
         const resp = props.location.hash;
         let authToken = resp.substring(resp.indexOf('=')+1, resp.indexOf('&'));
+        console.log("resp: "+resp);
         localStorage.setItem('authToken', authToken);
         setToken(authToken);
     }, [props.location.hash]);
