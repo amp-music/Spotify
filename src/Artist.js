@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import { useParams } from 'react-router-dom';
 import TopTracks from './TopTracks';
 import Albums from "./Albums";
+import Chart from "./Chart";
 
 function Artist(props) {
     let { id } = useParams();
@@ -11,6 +12,7 @@ function Artist(props) {
     const [followers, setFollowers] = useState();
     const [popularity, setPopularity] = useState(0);
     const [albums, setAlbums] = useState([]);
+    const [albumIDs, setAlbumIDs] = useState([]);
 
 
     const authToken = localStorage.getItem("authToken");
@@ -34,7 +36,12 @@ function Artist(props) {
             }
         });
         const respjson = await resp.json();
-        console.dir(respjson);
+        setAlbums(respjson?.items);
+        const ids = [];
+        respjson.items.forEach(album => {
+            ids.push(album.id);
+        });
+        setAlbumIDs(ids);
     }
 
     useEffect( () => {
@@ -55,16 +62,23 @@ function Artist(props) {
             </div>
         );
     }
+    else if (albumIDs) {
+        return (
+            <div>
+                <h2>name: {name}</h2>
+                <h4>Has {followers} followers</h4>
+                <h4>Popularity rating: {popularity}</h4>
+                <TopTracks artistID={id} authToken={authToken}/>
+                <Albums artistID={id} authToken={authToken}/>
+                <br/>
+                <Chart authToken={authToken} albumIDs={albumIDs}/>
+            </div>
+        );
+    }
+    else {
+        return null;
+    }
 
-    return (
-        <div>
-            <h2>name: {name}</h2>
-            <h4>Has {followers} followers</h4>
-            <h4>Popularity rating: {popularity}</h4>
-            <TopTracks artistID={id} authToken={authToken}/>
-            <Albums artistID={id} authToken={authToken}/>
-        </div>
-    );
 }
 
 export default Artist
