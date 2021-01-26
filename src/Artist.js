@@ -62,6 +62,7 @@ function Artist(props) {
             <h4>Has {followers} followers</h4>
             <h4>Popularity rating: {popularity}</h4>
             <TopTracks artistID={id} authToken={authToken}/>
+            <Albums artistID={id} authToken={authToken}/>
         </div>
     );
 }
