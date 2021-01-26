@@ -1,5 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import { useParams } from 'react-router-dom';
+import TopTracks from './TopTracks';
+import Albums from "./Albums";
 
 function Artist(props) {
     let { id } = useParams();
@@ -59,6 +61,7 @@ function Artist(props) {
             <h2>name: {name}</h2>
             <h4>Has {followers} followers</h4>
             <h4>Popularity rating: {popularity}</h4>
+            <TopTracks artistID={id} authToken={authToken}/>
         </div>
     );
 }
