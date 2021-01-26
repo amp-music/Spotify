@@ -26,7 +26,7 @@ function TopTracks(props) {
 
     function displayTopTracks() {
         let ret = [];
-        if (topTracks.length > 0) {
+        if (topTracks && topTracks.length > 0) {
             topTracks.forEach((track, index) => {
                 ret.push(
                     <Card.Body key={index}>{track.name}</Card.Body>
