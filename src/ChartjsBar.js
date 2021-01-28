@@ -4,10 +4,12 @@ import PropTypes from 'prop-types';
 
 /*
 * All code directly related to the chart based heavily on https://www.educative.io/edpresso/how-to-use-chartjs-to-create-charts-in-react
+*
+* The code in this module uses react-rechartjs-2, which is a react wrapper around chart.js
 * */
 
 
-class Chart extends Component {
+class ChartjsBar extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -120,9 +122,9 @@ class Chart extends Component {
 
 }
 
-Chart.propTypes = {
+ChartjsBar.propTypes = {
     authToken: PropTypes.string.isRequired,
     albumIDs: PropTypes.array.isRequired,
 }
 
-export default Chart;
+export default ChartjsBar;

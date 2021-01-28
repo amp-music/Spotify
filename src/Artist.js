@@ -2,7 +2,9 @@ import React, {useEffect, useState} from 'react';
 import { useParams } from 'react-router-dom';
 import TopTracks from './TopTracks';
 import Albums from "./Albums";
-import Chart from "./Chart";
+import ChartjsBar from "./ChartjsBar";
+import Chart2 from "./Chart2";
+import ChartJSTest from "./ChartJSTest";
 
 function Artist(props) {
     let { id } = useParams();
@@ -71,7 +73,10 @@ function Artist(props) {
                 <TopTracks artistID={id} authToken={authToken}/>
                 <Albums artistID={id} authToken={authToken}/>
                 <br/>
-                <Chart authToken={authToken} albumIDs={albumIDs}/>
+                <ChartjsBar authToken={authToken} albumIDs={albumIDs}/>
+                <Chart2 authToken={authToken} albumIDs={albumIDs}/>
+                <ChartJSTest/>
+
             </div>
         );
     }
