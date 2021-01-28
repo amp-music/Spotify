@@ -1,0 +1,1 @@
+export const authLink = "https://accounts.spotify.com/authorize?client_id=8095d382e8214dc5b5e54f7f6cf9c8ef&redirect_uri=http:%2F%2Flocalhost:3000%2Fcallback&scope=user-read-private%20user-read-email%20user-top-read%20playlist-read-private%20user-read-recently-played%20user-library-read%20playlist-modify-public%20playlist-modify-private&response_type=token"
