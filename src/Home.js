@@ -18,7 +18,14 @@ function Home(props) {
     const handleSubmit = (event) => {
         event.preventDefault(); // Prevent browser reload
         console.dir(event);
-        setArtistID(searchBarState);
+
+        if (searchBarState.includes("spotify.com/artist")) {
+            const artistID = searchBarState.substring(searchBarState.indexOf("/artist/")+8, searchBarState.indexOf("?"));
+            setArtistID(artistID);
+        }
+        else {
+            setArtistID(searchBarState);
+        }
 
     }
 
