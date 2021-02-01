@@ -21,6 +21,11 @@ class ChartjsBar extends Component {
         this.myChart = null;
     }
 
+    getAvgAlbumPopularity() {
+        const avg =  this.state.popularity.reduce((total, num) => {return total + num})/this.state.popularity.length;
+        console.log("Average album popularity: "+avg);
+        return avg;
+    }
 
     async componentDidMount() {
         if (this.props.albumIDs && this.props.albumIDs.length > 0) {
@@ -44,6 +49,7 @@ class ChartjsBar extends Component {
                     popularity.push(album?.popularity);
                 });
                 this.setState({albums: respjson?.albums, ready: true, labels: labels, popularity: popularity});
+                this.props.avgAlbumPopularityCallback(this.getAvgAlbumPopularity());
             });
         }
 
@@ -125,6 +131,7 @@ class ChartjsBar extends Component {
 ChartjsBar.propTypes = {
     authToken: PropTypes.string.isRequired,
     albumIDs: PropTypes.array.isRequired,
+    avgAlbumPopularityCallback: PropTypes.func,
 }
 
 export default ChartjsBar;

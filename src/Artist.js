@@ -14,7 +14,8 @@ function Artist(props) {
     const [popularity, setPopularity] = useState(0);
     const [albums, setAlbums] = useState([]);
     const [albumIDs, setAlbumIDs] = useState([]);
-    const [numSongsPerAlbum, setNumSongsPerAlbum] = useState(0);
+    const [avgSongsPerAlbum, setAvgSongsPerAlbum] = useState(0);
+    const [avgAlbumPopularity, setAvgAlbumPopularity] = useState(0);
 
 
     const authToken = sessionStorage.getItem("authToken");
@@ -70,11 +71,12 @@ function Artist(props) {
                 <h2>name: {name}</h2>
                 <h4>Has {followers} followers</h4>
                 <h4>Popularity rating: {popularity}</h4>
-                <h4>Average number of songs per album: {numSongsPerAlbum}</h4>
+                <h4>Average number of songs per album: {avgSongsPerAlbum}</h4>
+                <h4>Average album popularity: {avgAlbumPopularity}</h4>
                 <TopTracks artistID={id} authToken={authToken}/>
-                <Albums artistID={id} authToken={authToken} avgSongsPerAlbumCallback={setNumSongsPerAlbum}/>
+                <Albums artistID={id} authToken={authToken} avgSongsPerAlbumCallback={setAvgSongsPerAlbum}/>
                 <br/>
-                <ChartjsBar authToken={authToken} albumIDs={albumIDs}/>
+                <ChartjsBar authToken={authToken} albumIDs={albumIDs} avgAlbumPopularityCallback={setAvgAlbumPopularity}/>
                 <ChartJSTest/>
 
             </div>
