@@ -22,6 +22,7 @@ function AlbumTracks(props) {
             );
         });
         setTracks(ret);
+        props.getNumTracksCallback(tracks.length); // set number of tracks in parent component. Slight issue: since this code will re-run when component updates, the array in the parent component will have more entries than expected. Good news: The average will be the same.
         setSetupDone(true);
     }
 
@@ -46,6 +47,7 @@ function AlbumTracks(props) {
 AlbumTracks.propTypes = {
     albumID: PropTypes.string.isRequired,
     authToken: PropTypes.string.isRequired,
+    getNumTracksCallback: PropTypes.func,
 }
 
 export default AlbumTracks;

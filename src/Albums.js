@@ -10,6 +10,18 @@ class Albums extends Component {
             albums: null,
             finishedSettingUp: false,
         }
+        this.numSongsPerAlbum = [];
+        this.getAvgSongsPerAlbum = this.getAvgSongsPerAlbum.bind(this);
+    }
+
+    getSumOfTracksPerAlbum() {
+        return this.numSongsPerAlbum.reduce((total, num) => {return total + num}); // Gets the sum of all elements in the array.
+    }
+
+    getAvgSongsPerAlbum(nextNum) {
+        this.numSongsPerAlbum.push(nextNum);
+        this.props.avgSongsPerAlbumCallback(this.getSumOfTracksPerAlbum()/this.numSongsPerAlbum.length); // average = sum / how many there are.
+        console.dir(this.numSongsPerAlbum);
     }
 
     displayAlbums() {
@@ -24,7 +36,7 @@ class Albums extends Component {
                             </Accordion.Toggle>
                         </Card.Header>
                         <Accordion.Collapse eventKey={index}>
-                            <AlbumTracks albumID={album.id} authToken={this.props.authToken}/>
+                            <AlbumTracks albumID={album.id} authToken={this.props.authToken} getNumTracksCallback={this.getAvgSongsPerAlbum}/>
                         </Accordion.Collapse>
                     </Card>
                 );
@@ -69,6 +81,7 @@ Albums.propTypes = {
     artistID: PropTypes.string.isRequired,
     visible: PropTypes.bool.isRequired,
     authToken: PropTypes.string.isRequired,
+    avgSongsPerAlbumCallback: PropTypes.func, // callback that sets state in parent component.
 }
 
 export default Albums;

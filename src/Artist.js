@@ -3,7 +3,6 @@ import { useParams } from 'react-router-dom';
 import TopTracks from './TopTracks';
 import Albums from "./Albums";
 import ChartjsBar from "./ChartjsBar";
-import Chart2 from "./Chart2";
 import ChartJSTest from "./ChartJSTest";
 
 function Artist(props) {
@@ -15,9 +14,10 @@ function Artist(props) {
     const [popularity, setPopularity] = useState(0);
     const [albums, setAlbums] = useState([]);
     const [albumIDs, setAlbumIDs] = useState([]);
+    const [numSongsPerAlbum, setNumSongsPerAlbum] = useState(0);
 
 
-    const authToken = localStorage.getItem("authToken");
+    const authToken = sessionStorage.getItem("authToken");
 
     async function getArtist() {
         const resp = await fetch(`https://api.spotify.com/v1/artists/${id}`, {
@@ -70,11 +70,11 @@ function Artist(props) {
                 <h2>name: {name}</h2>
                 <h4>Has {followers} followers</h4>
                 <h4>Popularity rating: {popularity}</h4>
+                <h4>Average number of songs per album: {numSongsPerAlbum}</h4>
                 <TopTracks artistID={id} authToken={authToken}/>
-                <Albums artistID={id} authToken={authToken}/>
+                <Albums artistID={id} authToken={authToken} avgSongsPerAlbumCallback={setNumSongsPerAlbum}/>
                 <br/>
                 <ChartjsBar authToken={authToken} albumIDs={albumIDs}/>
-                <Chart2 authToken={authToken} albumIDs={albumIDs}/>
                 <ChartJSTest/>
 
             </div>
