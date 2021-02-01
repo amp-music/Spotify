@@ -21,7 +21,6 @@ class Albums extends Component {
     getAvgSongsPerAlbum(nextNum) {
         this.numSongsPerAlbum.push(nextNum);
         this.props.avgSongsPerAlbumCallback(this.getSumOfTracksPerAlbum()/this.numSongsPerAlbum.length); // average = sum / how many there are.
-        console.dir(this.numSongsPerAlbum);
     }
 
     displayAlbums() {
