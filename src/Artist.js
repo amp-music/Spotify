@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import TopTracks from './TopTracks';
 import Albums from "./Albums";
 import ChartjsBar from "./ChartjsBar";
-import ChartJSTest from "./ChartJSTest";
+import TracksPerAlbumChart from "./TracksPerAlbumChart";
 
 function Artist(props) {
     let { id } = useParams();
@@ -77,7 +77,7 @@ function Artist(props) {
                 <Albums artistID={id} authToken={authToken} avgSongsPerAlbumCallback={setAvgSongsPerAlbum}/>
                 <br/>
                 <ChartjsBar authToken={authToken} albumIDs={albumIDs} avgAlbumPopularityCallback={setAvgAlbumPopularity}/>
-                <ChartJSTest/>
+                <TracksPerAlbumChart albums={albums}/>
 
             </div>
         );
