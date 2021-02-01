@@ -9,7 +9,7 @@ function Home(props) {
     const [searchBarState, setSearchBarState] = useState();
 
     useEffect(() => {
-        let token = localStorage.getItem("authToken");
+        let token = sessionStorage.getItem("authToken");
         if (token) {
             setAuthToken(token);
         }
